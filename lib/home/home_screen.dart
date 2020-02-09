@@ -50,74 +50,86 @@ class _HomePageState extends State<HomePage> {
                     itemCount: _status.data.length,
                     itemBuilder: (context, index) {
                       var item = _status.data[index];
-                      return Card(
-                        elevation: 6,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        margin: EdgeInsets.only(
-                            top: 10, right: 20, left: 20, bottom: 10),
-                        child: Container(
-                          height: 120,
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              //news image
-                              Container(
-                                height: 80,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border:
-                                        Border.all(color: Colors.red, width: 1),
-                                    image: DecorationImage(
-                                        image: NetworkImage(item.imageUrl))),
+                      return Stack(
+                        children: <Widget>[
+                          Container(
+                            child: Card(
+                              elevation: 6,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
                               ),
-                              SizedBox(
-                                width: 20,
-                              ),
+                              margin: EdgeInsets.only(
+                                  top: 10, right: 20, left: 20, bottom: 10),
+                              child: Container(
+                                height: 100,
+                                padding: EdgeInsets.only(left: 10, right: 10),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    //news image
+                                    Container(
+                                      height: 80,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border:
+                                              Border.all(color: Colors.red, width: 1),
+                                          image: DecorationImage(
+                                              image: NetworkImage(item.imageUrl))),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
 
-                              //title and info
-                              Expanded(
-                                child: Container(
-                                  height: 80,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      //title
-                                      Expanded(
-                                        child: Container(
-                                          color: Colors.red,
-                                          padding: EdgeInsets.only(right: 40),
-                                          child: Text(
-                                            item.newsTitle,
-                                            maxLines: 3,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
+                                    //title and info
+                                    Expanded(
+                                      child: Container(
+                                        height: 80,
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: <Widget>[
+                                            //title
+                                            Expanded(
+                                              child: Container(
+                                                padding: EdgeInsets.only(right: 48),
+                                                child: Text(
+                                                  item.newsTitle,
+                                                  maxLines: 3,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.bold),
+                                                ),
+                                              ),
+                                            ),
+
+                                            //info
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: <Widget>[
+                                                Text("Likes(${item.likes})"),
+                                                Text("${item.numOfViews} Views"),
+                                              ],
+                                            )
+                                          ],
                                         ),
                                       ),
-
-                                      //info
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          Text("Likes(${item.likes})"),
-                                          Text("${item.numOfViews} Views"),
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                          Positioned(
+                            right: 10,
+                              top:20,
+                              child: item.newsType == "85"
+                                  ?Image.asset("assets/images/news_video_label.png" , width: 64 )
+                                  :Image.asset("assets/images/news_article_label.png" , width: 64 )
+                          )
+                        ],
                       );
                     })
                 : Container(),
