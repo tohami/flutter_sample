@@ -35,8 +35,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("News List"),
+        backgroundColor: Colors.redAccent,
+        title: Text("News"),
+        actions: <Widget>[
+          IconButton(icon: Image.asset("assets/images/ic_filter.png"), onPressed: null)
+        ],
       ),
+      drawer: Container(),
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
