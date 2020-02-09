@@ -58,6 +58,7 @@ class _HomePageState extends State<HomePage> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.0),
                               ),
+                              color: Colors.white.withAlpha(180),
                               margin: EdgeInsets.only(
                                   top: 10, right: 20, left: 20, bottom: 10),
                               child: Container(
@@ -109,8 +110,8 @@ class _HomePageState extends State<HomePage> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
                                               children: <Widget>[
-                                                Text("Likes(${item.likes})"),
-                                                Text("${item.numOfViews} Views"),
+                                                Text("Likes(${item.likes})" , style: TextStyle(color: Colors.red , fontWeight: FontWeight.bold),),
+                                                Text("${item.numOfViews} Views", style: TextStyle(color: Colors.redAccent)),
                                               ],
                                             )
                                           ],
@@ -122,6 +123,8 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
+
+                          //label
                           Positioned(
                             right: 10,
                               top:20,
