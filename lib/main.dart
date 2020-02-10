@@ -11,7 +11,7 @@ class WelcomeToFlutter extends StatelessWidget {
             child: Text(
               "Weclome to flutter" ,
               style: TextStyle(
-                fontSize: 24 
+                //todo add text style
               ),
             ),
           )),
