@@ -14,20 +14,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  //home page status  with idle as initial state
   DataState<List<NewsItem>> _status = DataState(status: Status.IDLE);
 
   void _getData() {
-    _changeStatus(DataState(status: Status.LOADING));
-
-    getNewsList().then((data) {
-      _changeStatus(DataState(status: Status.SUCCESS, data: data));
-    }).catchError((_) {
-      _changeStatus(
-          DataState(status: Status.ERROR, error: "Something went wrong!!"));
-    });
+    //todo get the data from api
   }
 
   void _changeStatus(DataState<List<NewsItem>> status) {
+    //change the state
     setState(() {
       _status = status;
     });
@@ -45,43 +41,48 @@ class _HomePageState extends State<HomePage> {
       appBar: NewsListAppBar(),
       drawer: Container(),
       body: Container(
+
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/images/news_list_bg.png"),
                 fit: BoxFit.cover)),
+
         child: Stack(
           children: <Widget>[
-            //result
+            //display list od news when success
             _status.status == Status.SUCCESS
                 ? ListView.builder(
                     itemCount: _status.data.length,
                     itemBuilder: (context, index) {
                       var item = _status.data[index];
-                      return NewsItemWidget(item , ()=> navigateToDetails(item));
+                      return NewsItemWidget(item , ()=> onListItemClicked(item));
                     })
                 : Container(),
 
-            //error
+            //display error if status is error
             _status.status == Status.ERROR
                 ? Center(
                     child: Text(_status.error),
                   )
                 : Container(),
 
-            //loading
+            //display loading is status is loading
             _status.status == Status.LOADING
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
                 : Container()
+
+            //no case for idle , so if status is idle the stack will be empty
+
           ],
         ),
       ),
     );
   }
 
-  navigateToDetails(NewsItem item) {
-    var args = DetailsPageNavArgs(item.nid , item.imageUrl , item.newsTitle) ;
-    Navigator.of(context).pushNamed(DetailsPage.ROUTE_NAME , arguments: args) ;
+  //handle list item click
+  onListItemClicked(NewsItem item) {
+    //todo on list item clicked navigate to details screen
   }
 }
