@@ -11,7 +11,6 @@ Future<http.Response> httpGet(String path) {
 Future<List<NewsItem>> getNewsList() async {
   //get the json from api
   http.Response newsListApiResponse = await httpGet("/safe/GetNews") ;
-
   var newsListJson = json.decode(newsListApiResponse.body) ;
 
   //parse the json

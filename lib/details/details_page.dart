@@ -18,7 +18,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
 
-    //todo extract the nav args data
+    final DetailsPageNavArgs args = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +38,18 @@ class _DetailsPageState extends State<DetailsPage> {
                 fit: BoxFit.cover)),
         child: Column(
           children: <Widget>[
-            // todo display the title and image
+            RoundNetWorkImage(
+              args.image,
+              height: 160,
+              width: 160,
+              borderColor: Colors.red,
+              borderWidth: 1,
+            ),
+            SizedBox(height: 10,) ,
+
+            Text(args.title , textAlign: TextAlign.center , style: TextStyle(
+              color: Colors.white , fontSize: 20
+            ),)
           ],
         ),
       ),

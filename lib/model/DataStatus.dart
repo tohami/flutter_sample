@@ -7,5 +7,5 @@ class DataState<T> {
   final T data ;
   final String error ;
 
-  DataState({@required this.status, this.data, this.error});
+  DataState({@required this.status, this.data = null, this.error = null});
 }
